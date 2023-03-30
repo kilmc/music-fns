@@ -8,7 +8,8 @@
   "scripts": {
     "build": "rollup --config",
     "test": "vitest",
-    "changeset": "changeset"
+    "changeset": "changeset",
+    "release": "pnpm build && changeset publish"
   },
   "keywords": [],
   "author": "Kilian McMahon",
