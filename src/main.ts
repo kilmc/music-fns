@@ -1,1 +1,2 @@
-export { getChord } from "./chords/getChord";
+export { getChord } from './chords/getChord';
+export { getKey } from './keys/getKey';
