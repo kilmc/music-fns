@@ -1,11 +1,3 @@
-**Getting started:**
+# Music Functions
 
-- Generate the new repo from the template [js-packages](https://github.com/kilmc/js-package)
-- Update the `package.json`
-  - name
-  - description
-- Add changeset bot to GitHub repo
-
-# Project
-
-This is a template for a typescript-based JS library
+This is a library for helping with tasks related to music. I'm making it for myself mostly but it's open source so if you find it, and find it useful, that's great!
