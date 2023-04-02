@@ -1,7 +1,7 @@
 {
   "name": "@kilmc/music-fns",
   "description": "A template JS package",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "main": "dist/bundle.js",
   "module": "dist/bundle.mjs",
   "types": "dist/main.d.ts",
