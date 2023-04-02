@@ -1,5 +1,5 @@
-import { majors } from '../consts';
+import { majorScales } from '../consts';
 
 export const getRelativeMinorName = (pitchClass: string) => {
-	return `${majors[pitchClass][5]} minor`;
+  return `${majorScales[pitchClass][5]} minor`;
 };
