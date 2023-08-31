@@ -160,6 +160,16 @@ export const majorScaleQualities: TChordQuality[] = [
   'diminished',
 ];
 
+export const majorScaleRomanNumerals = [
+  'I',
+  'ii',
+  'iii',
+  'IV',
+  'V',
+  'vi',
+  'vii',
+];
+
 export const addTypes = ['add2', 'add4', 'add9', 'add11', 'add13'];
 export const susTypes = ['sus2', 'sus4'];
 

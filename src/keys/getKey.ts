@@ -1,14 +1,29 @@
-import { getChords } from '../chords/getChords';
+import { getScaleChords } from '../chords/getScaleChords';
 import { majorScales, modes } from '../consts';
 import { isMajor, offsetArr } from '../helper';
 import { getModeName } from '../modes/getName';
 import { isModeName } from '../modes/helpers';
 import { extractScaleName } from '../scale/extractName';
 import { getMajorFromMode } from '../scale/getMajorFromMode';
-import type { TMode } from '../types';
+import type { IChord, TMode } from '../types';
 import { getRelativeMinorName } from './helpers';
 
-export const getKey = (key: string) => {
+type KeyInfo = {
+  name: string;
+  notes: string[];
+  major: {
+    name: string;
+    notes: string[];
+  };
+  minor: {
+    name: string;
+    notes: string[];
+  };
+  modes(name: TMode): string[];
+  chords: IChord[];
+};
+
+export const getKey = (key: string): KeyInfo | undefined => {
   const [pitch, mode] = extractScaleName(key) || [];
 
   if (mode === undefined || pitch === undefined) {
@@ -38,10 +53,6 @@ export const getKey = (key: string) => {
     modes(name: TMode) {
       return offsetArr(majorScale, modes.indexOf(name));
     },
-    chords: getChords(scale, mode),
+    chords: getScaleChords(scale, mode),
   };
-};
-
-const possibleVersion = {
-  name: 'C major',
 };
