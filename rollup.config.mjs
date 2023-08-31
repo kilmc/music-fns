@@ -12,7 +12,7 @@ export default {
     },
     {
       file: pkg.module,
-      format: 'es',
+      format: 'esm',
     },
   ],
   plugins: [terser(), typescript({ outDir: 'dist' })],
