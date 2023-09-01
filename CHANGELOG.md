@@ -1,5 +1,11 @@
 # @kilmc/music-fns
 
+## 0.4.0
+
+### Minor Changes
+
+- 8b89754: Remove umd bundle
+
 ## 0.3.0
 
 ### Minor Changes
