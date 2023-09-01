@@ -6,12 +6,7 @@ export default {
   input: 'src/main.ts',
   output: [
     {
-      name: 'libraryBundleName',
       file: pkg.main,
-      format: 'umd',
-    },
-    {
-      file: pkg.module,
       format: 'esm',
     },
   ],
