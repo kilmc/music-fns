@@ -3,7 +3,6 @@
   "description": "A template JS package",
   "version": "0.3.0",
   "main": "dist/bundle.js",
-  "module": "dist/bundle.mjs",
   "types": "dist/main.d.ts",
   "publishConfig": {
     "access": "public"
