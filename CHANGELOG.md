@@ -1,5 +1,11 @@
 # @kilmc/music-fns
 
+## 0.5.0
+
+### Minor Changes
+
+- 8b2f0b5: Convert package to module
+
 ## 0.4.0
 
 ### Minor Changes
