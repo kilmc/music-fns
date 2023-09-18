@@ -1,58 +1,36 @@
-import { majorScales } from '../consts';
-import { getEquivalentNote } from '../notes/getEquivalentNote';
-
-// export const determineTonicFromNotes = (arr: string[]) => {
-//   const noteFrequency = Object.entries(
-//     arr.reduce<Record<string, number>>((accum, note) => {
-//       if (accum[note]) {
-//         accum[note] += accum[note];
-//       } else {
-//         accum[note] = 1;
-//       }
-
-//       return accum;
-//     }, {})
-//   ).sort((a, b) => {
-//     return b[1] - a[1];
-//   });
-
-//   return noteFrequency[0];
-// };
-
-const filterScalesFromNotes = (
-  notes: string[],
-  scales: string[][],
-  exclusive = false
-) => {
-  return scales.filter((scale) => {
-    if (exclusive) {
-      return !notes.some(
-        (note) =>
-          scale.includes(note) || scale.includes(getEquivalentNote(note))
-      );
-    } else {
-      return notes.every(
-        (note) =>
-          scale.includes(note) || scale.includes(getEquivalentNote(note))
-      );
-    }
-  });
-};
+import { ScaleGroups, scales } from '../db/scales/allScales.js';
+import { noteToInteger } from '../notes/noteToInteger.js';
 
 type KeyGuess = { name?: string; scale: string[] };
+
+const getScaleIntegersObj = (name: ScaleGroups) => {
+  return Object.entries(scales[name]).reduce<Record<string, number[]>>(
+    (accum, [scaleName, scaleInfo]) => {
+      accum[`${scaleName} ${name}`] = scaleInfo.integers;
+      return accum;
+    },
+    {}
+  );
+};
 
 export const guessScale = (
   includedNotes: string[],
   excludedNotes: string[]
-): KeyGuess[] => {
-  const allMajors = Object.values(majorScales);
-  const possibleScales = filterScalesFromNotes(excludedNotes, allMajors, true);
-  const filteredScales = filterScalesFromNotes(includedNotes, possibleScales);
+) => {
+  const includedIntegers = includedNotes.map(noteToInteger);
+  const excludedIntegers = excludedNotes.map(noteToInteger);
+  const majorScales = getScaleIntegersObj('major');
+  const possibleScales = Object.entries(majorScales).filter(
+    ([scaleName, scale]) => {
+      return !scale.some((note) => excludedIntegers.includes(note));
+    }
+  );
 
-  return filteredScales.map((scale) => {
-    return {
-      name: `${scale?.at(0)} major`,
-      scale,
-    };
+  const result = possibleScales.filter(([name, scale]) => {
+    return includedIntegers.every((note) => {
+      return scale.includes(note);
+    });
   });
+
+  return result;
 };

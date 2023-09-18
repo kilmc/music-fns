@@ -1,66 +1,91 @@
-import { isFlat, isSharp } from '../helper';
-import { getScale } from '../scale/getScale';
-import type { TIntervalShorthand } from '../types';
-import { intervalToSemitone } from './intervalToSemitone';
-import { resetNotePositions } from './helpers';
+import { isFlat, isSharp } from '../helper.js';
+import { findScaleByName, getScale } from '../scale/getScale.js';
+import type { TIntervalShorthand } from '../types.js';
+import { intervalToSemitone } from './intervalToSemitone.js';
+import { resetNotePositions } from './helpers.js';
+import { NotePosition } from '../consts.js';
 
-interface IForceVariant {
-	forceFlat?: boolean;
-	forceSharp?: boolean;
+interface PickNoteVariantOptions {
+  forceFlat?: boolean;
+  forceSharp?: boolean;
+  forceScale?: string[];
 }
 
-const pickNoteVariant = (notes: string[], srcNote: string, options?: IForceVariant) => {
-	const [hasFlat, hasSharp] = [isFlat(srcNote), isSharp(srcNote)];
+const pickNoteVariant = (
+  notes: NotePosition,
+  srcNote: string,
+  options?: PickNoteVariantOptions
+) => {
+  const [hasFlat, hasSharp] = [isFlat(srcNote), isSharp(srcNote)];
+  if (options?.forceSharp || hasSharp) {
+    return notes.sharp;
+  }
 
-	if (options?.forceSharp || hasSharp) {
-		return notes[0];
-	}
+  if (options?.forceFlat || hasFlat) {
+    return notes.flat;
+  }
 
-	if (options?.forceFlat || hasFlat) {
-		return notes[1];
-	}
-
-	return notes[1];
+  return notes.natural ? notes.natural : notes.flat;
 };
 
-const pickNoteFromScale = (notes: string[], scale: string[] | undefined) => {
-	if (scale === undefined) {
-		return 'X';
-	}
+const pickNoteFromScale = (noteGroup: NotePosition, scale: string[]) => {
+  if (scale === undefined) return 'X';
 
-	const correctIndex = notes.findIndex((note) => scale.includes(note));
+  if (noteGroup.flat && scale.includes(noteGroup.flat)) {
+    return noteGroup.flat;
+  } else if (noteGroup.sharp && scale.includes(noteGroup.sharp)) {
+    return noteGroup.sharp;
+  } else if (noteGroup.natural && scale.includes(noteGroup.natural)) {
+    return noteGroup.natural;
+  }
 
-	return correctIndex >= 0 ? notes[correctIndex] : 'X';
+  return 'X';
 };
 
 interface INoteTransposeOptions {
-	forceFlat?: boolean;
-	forceSharp?: boolean;
-	keyName?: string;
+  forceFlat?: boolean;
+  forceSharp?: boolean;
+  forceAliasAccidentals?: boolean;
+  keyName?: string;
 }
 
 export const transposeNote = (
-	note: string,
-	interval: TIntervalShorthand,
-	options?: INoteTransposeOptions
+  note: string,
+  interval: TIntervalShorthand,
+  options?: INoteTransposeOptions
 ): string => {
-	const transposedNotes = resetNotePositions(note)[intervalToSemitone(interval, true)];
+  const transposedNotes =
+    resetNotePositions(note)[intervalToSemitone(interval, true)];
 
-	if (transposedNotes.length === 1) {
-		return transposedNotes[0];
-	}
+  const chooseSharp = /a/i.test(interval) || options?.forceSharp;
+  const chooseFlat = /d/i.test(interval) || options?.forceFlat;
 
-	if (/a/i.test(interval)) {
-		return pickNoteVariant(transposedNotes, note, { forceSharp: true });
-	}
+  if (Object.values(transposedNotes).length === 1 && transposedNotes.natural) {
+    return transposedNotes.natural;
+  }
 
-	if (/d/i.test(interval)) {
-		return pickNoteVariant(transposedNotes, note, { forceFlat: true });
-	}
+  if (chooseSharp && transposedNotes.sharp) {
+    return transposedNotes.sharp;
+  }
 
-	if (options?.keyName !== undefined) {
-		return pickNoteFromScale(transposedNotes, getScale(options.keyName));
-	}
+  if (chooseFlat && transposedNotes.flat) {
+    return transposedNotes.flat;
+  }
 
-	return pickNoteVariant(transposedNotes, note);
+  if (options?.forceFlat && options.forceSharp) {
+    console.error(
+      'You cannot pass both forceFlat and ForceSharp options at the same time'
+    );
+  }
+
+  if (options?.keyName !== undefined) {
+    return pickNoteFromScale(
+      transposedNotes,
+      findScaleByName(options.keyName)?.notes
+    );
+  }
+
+  return transposedNotes.natural
+    ? transposedNotes.natural
+    : transposedNotes.flat || '';
 };
