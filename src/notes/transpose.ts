@@ -1,66 +1,77 @@
-import { isFlat, isSharp } from '../helper';
-import { getScale } from '../scale/getScale';
-import type { TIntervalShorthand } from '../types';
-import { intervalToSemitone } from './intervalToSemitone';
-import { resetNotePositions } from './helpers';
+import type { IntervalShorthand } from '../types.js';
+import { intervalToSemitone } from './intervalToSemitone.js';
+import { resetNotePositions } from './helpers.js';
+import { NotePosition } from '../consts.js';
 
-interface IForceVariant {
-	forceFlat?: boolean;
-	forceSharp?: boolean;
-}
+const pickNoteFromScale = (noteGroup: NotePosition, scale: string[]) => {
+  if (scale === undefined) return 'X';
 
-const pickNoteVariant = (notes: string[], srcNote: string, options?: IForceVariant) => {
-	const [hasFlat, hasSharp] = [isFlat(srcNote), isSharp(srcNote)];
+  if (noteGroup.flat && scale.includes(noteGroup.flat)) {
+    return noteGroup.flat;
+  } else if (noteGroup.sharp && scale.includes(noteGroup.sharp)) {
+    return noteGroup.sharp;
+  } else if (noteGroup.natural && scale.includes(noteGroup.natural)) {
+    return noteGroup.natural;
+  }
 
-	if (options?.forceSharp || hasSharp) {
-		return notes[0];
-	}
-
-	if (options?.forceFlat || hasFlat) {
-		return notes[1];
-	}
-
-	return notes[1];
-};
-
-const pickNoteFromScale = (notes: string[], scale: string[] | undefined) => {
-	if (scale === undefined) {
-		return 'X';
-	}
-
-	const correctIndex = notes.findIndex((note) => scale.includes(note));
-
-	return correctIndex >= 0 ? notes[correctIndex] : 'X';
+  return 'X';
 };
 
 interface INoteTransposeOptions {
-	forceFlat?: boolean;
-	forceSharp?: boolean;
-	keyName?: string;
+  forceFlat?: boolean;
+  forceSharp?: boolean;
+  forceSimple?: boolean;
+  scale?: string[];
 }
 
 export const transposeNote = (
-	note: string,
-	interval: TIntervalShorthand,
-	options?: INoteTransposeOptions
+  note: string,
+  interval: IntervalShorthand,
+  options?: INoteTransposeOptions
 ): string => {
-	const transposedNotes = resetNotePositions(note)[intervalToSemitone(interval, true)];
+  const transposedNotes =
+    resetNotePositions(note)[intervalToSemitone(interval, true)];
 
-	if (transposedNotes.length === 1) {
-		return transposedNotes[0];
-	}
+  if (Object.values(transposedNotes).length === 1 && transposedNotes.natural) {
+    return transposedNotes.natural;
+  }
 
-	if (/a/i.test(interval)) {
-		return pickNoteVariant(transposedNotes, note, { forceSharp: true });
-	}
+  if (options?.forceSimple && transposedNotes.natural) {
+    return transposedNotes.natural;
+  }
 
-	if (/d/i.test(interval)) {
-		return pickNoteVariant(transposedNotes, note, { forceFlat: true });
-	}
+  // Note: There are individual checks for augmented and diminished intervals because even if the chord
+  // is spelled with a sharp or flat, you want the transposition to be according to the type of
+  // interval (augmented, diminished). If you combine the boolean logic it forces notes in a
+  // Bbaug to be Bb D Gb instead of what it should be which is Bb D F# to reflect the sharpening
+  // of the 5th in the chord
+  if (/a/i.test(interval) && transposedNotes.sharp) {
+    return transposedNotes.sharp;
+  }
 
-	if (options?.keyName !== undefined) {
-		return pickNoteFromScale(transposedNotes, getScale(options.keyName));
-	}
+  if (/d/i.test(interval) && transposedNotes.flat) {
+    return transposedNotes.flat;
+  }
 
-	return pickNoteVariant(transposedNotes, note);
+  if (options?.forceFlat && options?.forceSharp) {
+    console.error(
+      'You cannot pass both forceFlat and ForceSharp options at the same time'
+    );
+  }
+
+  if (options?.forceSharp && transposedNotes.sharp) {
+    return transposedNotes.sharp;
+  }
+
+  if (options?.forceFlat && transposedNotes.flat) {
+    return transposedNotes.flat;
+  }
+
+  if (options?.scale !== undefined) {
+    return pickNoteFromScale(transposedNotes, options.scale);
+  }
+
+  return transposedNotes.natural
+    ? transposedNotes.natural
+    : transposedNotes.flat || '';
 };

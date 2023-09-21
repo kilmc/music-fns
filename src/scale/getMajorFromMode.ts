@@ -1,11 +1,12 @@
-import { majorScales, modes } from '../consts';
-import type { TMode } from '../types';
+import { scaleTypes } from '../consts.js';
+import { major } from '../db/scales/allScales.js';
+import type { TScaleType } from '../types.js';
 
-export const getMajorFromMode = (tonic: string, mode: TMode) => {
-  const modeIndex = modes.indexOf(mode);
-  const scaleIndex = Object.values(majorScales).findIndex((notes) => {
-    return notes[modeIndex] === tonic;
+export const getMajorFromMode = (tonic: string, mode: TScaleType) => {
+  const modeIndex = scaleTypes.indexOf(mode);
+  const scaleIndex = Object.values(major).findIndex((notes) => {
+    return notes.notes[modeIndex] === tonic;
   });
 
-  return Object.keys(majorScales)[scaleIndex];
+  return Object.keys(major)[scaleIndex];
 };

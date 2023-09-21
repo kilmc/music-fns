@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { getScaleDegreeOfNote } from './getScaleDegreeOfNote';
+import { getScaleDegreeOfNote } from './getScaleDegreeOfNote.js';
 
 describe('getScaleDegreeOfNote', () => {
   it('converts notes to degrees based on a scale', () => {

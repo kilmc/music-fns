@@ -1,11 +1,11 @@
 import type {
-  TChordQuality,
-  TChordType,
-  TIntervalShorthand,
-  TMode,
-} from './types';
+  ChordQuality,
+  ChordType,
+  IntervalShorthand,
+  Mode,
+} from './types.js';
 
-export const intervalsMap: Record<TIntervalShorthand, number> = {
+export const intervalsMap: Record<IntervalShorthand, number> = {
   d2: 0,
   P1: 0,
   A1: 1,
@@ -59,7 +59,7 @@ export const intervalsMap: Record<TIntervalShorthand, number> = {
   A14: 24,
   A15: 25,
 };
-export const intervalsBySemitone: Record<string, TIntervalShorthand[]> = {
+export const intervalsBySemitone: Record<string, IntervalShorthand[]> = {
   '0': ['P1', 'd2'],
   '1': ['m2', 'A1'],
   '2': ['M2', 'd3'],
@@ -88,42 +88,69 @@ export const intervalsBySemitone: Record<string, TIntervalShorthand[]> = {
   '25': ['A15'],
 };
 
-export const chordQualityIntervalsMap: Record<string, TIntervalShorthand[]> = {
+export const chordQualityIntervalsMap: Record<string, IntervalShorthand[]> = {
   major: ['P1', 'M3', 'P5'],
   augmented: ['P1', 'M3', 'A5'],
   minor: ['P1', 'm3', 'P5'],
   diminished: ['P1', 'm3', 'd5'],
 };
 
-export const scaleIntervals: Record<TMode | string, TIntervalShorthand[]> = {
-  ionian: ['P1', 'M2', 'M3', 'P4', 'P5', 'M6', 'M7', 'P8'],
+export const scaleIntervals = {
+  major: ['P1', 'M2', 'M3', 'P4', 'P5', 'M6', 'M7', 'P8'],
   dorian: ['P1', 'M2', 'm3', 'P4', 'P5', 'M6', 'm7', 'P8'],
   phrygian: ['P1', 'm2', 'm3', 'P4', 'P5', 'm6', 'm7', 'P8'],
   lydian: ['P1', 'M2', 'M3', 'A4', 'P5', 'M6', 'M7', 'P8'],
-  myxolydian: ['P1', 'M2', 'M3', 'P4', 'P5', 'M6', 'm7', 'P8'],
-  aeolian: ['P1', 'M2', 'm3', 'P4', 'P5', 'm6', 'm7', 'P8'],
+  mixolydian: ['P1', 'M2', 'M3', 'P4', 'P5', 'M6', 'm7', 'P8'],
+  minor: ['P1', 'M2', 'm3', 'P4', 'P5', 'm6', 'm7', 'P8'],
+  locrian: ['P1', 'm2', 'm3', 'P4', 'd5', 'm6', 'm7', 'P8'],
+} as const;
+
+export type ScaleType = keyof typeof scaleIntervals;
+export const scaleTypes = Object.keys(scaleIntervals) as ScaleType[];
+
+const futureScaleIntervals = {
   'harmonic-minor': ['P1', 'M2', 'm3', 'P4', 'P5', 'm6', 'M7', 'P8'],
   'melodic-minor': ['P1', 'M2', 'm3', 'P4', 'P5', 'M6', 'M7', 'P8'],
-  locrian: ['P1', 'm2', 'm3', 'P4', 'd5', 'm6', 'm7', 'P8'],
   'dorian-b2': ['P1', 'm2', 'm3', 'P4', 'P5', 'M6', 'm7', 'P8'],
 };
+
+export type NotePosition = {
+  natural?: string;
+  sharp?: string;
+  flat?: string;
+};
+
+export const notePositions2: NotePosition[] = [
+  { natural: 'A' },
+  { sharp: 'A#', flat: 'Bb' },
+  { natural: 'B', flat: 'Cb' },
+  { natural: 'C', sharp: 'B#' },
+  { sharp: 'C#', flat: 'Db' },
+  { natural: 'D' },
+  { sharp: 'D#', flat: 'Eb' },
+  { natural: 'E', flat: 'Fb' },
+  { natural: 'F', sharp: 'E#' },
+  { sharp: 'F#', flat: 'Gb' },
+  { natural: 'G' },
+  { sharp: 'G#', flat: 'Ab' },
+];
 
 export const notePositions = [
   ['A'],
   ['A#', 'Bb'],
-  ['B'],
-  ['C'],
+  ['B', 'Cb'],
+  ['C', 'B#'],
   ['C#', 'Db'],
   ['D'],
   ['D#', 'Eb'],
-  ['E'],
-  ['F'],
+  ['E', 'Fb'],
+  ['F', 'E#'],
   ['F#', 'Gb'],
   ['G'],
   ['G#', 'Ab'],
 ];
 
-export const majorScales: Record<string, string[]> = {
+export const oldMajorScales: Record<string, string[]> = {
   C: ['C', 'D', 'E', 'F', 'G', 'A', 'B'],
   F: ['F', 'G', 'A', 'Bb', 'C', 'D', 'E'],
   Bb: ['Bb', 'C', 'D', 'Eb', 'F', 'G', 'A'],
@@ -141,16 +168,16 @@ export const majorScales: Record<string, string[]> = {
   'C#': ['C#', 'D#', 'E#', 'F#', 'G#', 'A#', 'B#'],
 };
 
-export const modes: TMode[] = [
+export const modes: Mode[] = [
   'ionian',
   'dorian',
   'phrygian',
   'lydian',
-  'myxolydian',
+  'mixolydian',
   'aeolian',
   'locrian',
 ];
-export const majorScaleQualities: TChordQuality[] = [
+export const majorScaleQualities: ChordQuality[] = [
   'major',
   'minor',
   'minor',
@@ -160,20 +187,20 @@ export const majorScaleQualities: TChordQuality[] = [
   'diminished',
 ];
 
-export const majorScaleRomanNumerals = [
+export const romanNumerals = [
   'I',
-  'ii',
-  'iii',
+  'II',
+  'III',
   'IV',
   'V',
-  'vi',
-  'vii',
-];
+  'VI',
+  'VII',
+] as const;
 
 export const addTypes = ['add2', 'add4', 'add9', 'add11', 'add13'];
 export const susTypes = ['sus2', 'sus4'];
 
-export const numberTypeChordMap: Record<string, TChordType> = {
+export const numberTypeChordMap: Record<string, ChordType> = {
   2: 'second',
   4: 'fourth',
   5: 'fifth',
@@ -182,4 +209,67 @@ export const numberTypeChordMap: Record<string, TChordType> = {
   9: 'ninth',
   11: 'eleventh',
   13: 'thirteenth',
+};
+
+export const majorScales = {
+  C: {
+    midiNumbers: [0, 2, 4, 5, 7, 9, 11],
+    notes: ['C', 'D', 'E', 'F', 'G', 'A', 'B'],
+  },
+  F: {
+    midiNumbers: [5, 7, 9, 10, 12, 14, 16],
+    notes: ['F', 'G', 'A', 'Bb', 'C', 'D', 'E'],
+  },
+  Bb: {
+    midiNumbers: [10, 12, 14, 15, 17, 19, 21],
+    notes: ['Bb', 'C', 'D', 'Eb', 'F', 'G', 'A'],
+  },
+  Eb: {
+    midiNumbers: [3, 5, 7, 8, 10, 12, 14],
+    notes: ['Eb', 'F', 'G', 'Ab', 'Bb', 'C', 'D'],
+  },
+  Ab: {
+    midiNumbers: [8, 10, 12, 13, 15, 17, 19],
+    notes: ['Ab', 'Bb', 'C', 'Db', 'Eb', 'F', 'G'],
+  },
+  Db: {
+    midiNumbers: [1, 3, 5, 6, 8, 10, 12],
+    notes: ['Db', 'Eb', 'F', 'Gb', 'Ab', 'Bb', 'C'],
+  },
+  Gb: {
+    midiNumbers: [6, 8, 10, 11, 13, 15, 17],
+    notes: ['Gb', 'Ab', 'Bb', 'Cb', 'Db', 'Eb', 'F'],
+  },
+  Cb: {
+    midiNumbers: [11, 13, 15, 16, 18, 20, 22],
+    notes: ['Cb', 'Db', 'Eb', 'Fb', 'Gb', 'Ab', 'Bb'],
+  },
+  G: {
+    midiNumbers: [7, 9, 11, 12, 14, 16, 18],
+    notes: ['G', 'A', 'B', 'C', 'D', 'E', 'F#'],
+  },
+  D: {
+    midiNumbers: [2, 4, 6, 7, 9, 11, 13],
+    notes: ['D', 'E', 'F#', 'G', 'A', 'B', 'C#'],
+  },
+  A: {
+    midiNumbers: [9, 11, 13, 14, 16, 18, 20],
+    notes: ['A', 'B', 'C#', 'D', 'E', 'F#', 'G#'],
+  },
+  E: {
+    midiNumbers: [4, 6, 8, 9, 11, 13, 15],
+    notes: ['E', 'F#', 'G#', 'A', 'B', 'C#', 'D#'],
+  },
+  B: {
+    midiNumbers: [11, 13, 15, 16, 18, 20, 22],
+    notes: ['B', 'C#', 'D#', 'E', 'F#', 'G#', 'A#'],
+  },
+  'F#': {
+    midiNumbers: [6, 8, 10, 11, 13, 15, 17],
+    notes: ['F#', 'G#', 'A#', 'B', 'C#', 'D#', 'E#'],
+  },
+  'C#': {
+    midiNumbers: [1, 3, 5, 6, 8, 10, 12],
+    notes: ['C#', 'D#', 'E#', 'F#', 'G#', 'A#', 'B#'],
+  },
 };
