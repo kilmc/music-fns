@@ -32,6 +32,9 @@ type KeyInfo = {
 
 export const getKey = (key: string): KeyInfo | undefined => {
   const [pitch, mode] = extractScaleName(key) || [];
+
+  if (pitch === undefined && mode === undefined) return undefined;
+
   const friendlyModeName = getFriendlyModeName(mode);
   if (mode === undefined || pitch === undefined) return undefined;
 
