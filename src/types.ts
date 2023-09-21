@@ -120,7 +120,7 @@ export interface ChordInfo {
 export interface Chord {
   name: string;
   notes: string[];
-  romanNumeral: string;
+  romanNumeral?: string;
 }
 
 export type ScaleQualities = (typeof majorScaleQualities)[number];
