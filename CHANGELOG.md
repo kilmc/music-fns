@@ -1,5 +1,11 @@
 # @kilmc/music-fns
 
+## 0.6.1
+
+### Patch Changes
+
+- e0e1d72: Make getKey more resilliant
+
 ## 0.6.0
 
 ### Minor Changes
