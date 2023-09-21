@@ -1,5 +1,11 @@
 # @kilmc/music-fns
 
+## 0.6.0
+
+### Minor Changes
+
+- 9953530: Improve system to improve accuracy
+
 ## 0.5.0
 
 ### Minor Changes
