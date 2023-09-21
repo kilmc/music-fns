@@ -1,12 +1,12 @@
 import { intervalsBySemitone } from '../consts.js';
-import type { TIntervalShorthand } from '../types.js';
+import type { IntervalShorthand } from '../types.js';
 import { resetNotePositions } from './helpers.js';
 
 export const getInterval = (
   noteX: string,
   noteY: string,
   showAlternatives = false
-): TIntervalShorthand | TIntervalShorthand[] => {
+): IntervalShorthand | IntervalShorthand[] => {
   const allNotes = resetNotePositions(noteX);
   const noteYIndex = allNotes.findIndex((note) =>
     Object.values(note).includes(noteY)

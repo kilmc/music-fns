@@ -1,10 +1,9 @@
-import { isFlat, isSharp } from '../helper.js';
 import { NoteType } from '../types.js';
 
 export const determineNoteType = (note: string): NoteType => {
-  if (isSharp(note)) {
+  if (/[A-G]#/.test(note)) {
     return 'sharp';
-  } else if (isFlat(note)) {
+  } else if (/[A-G]b/.test(note)) {
     return 'flat';
   } else {
     return 'natural';

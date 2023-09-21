@@ -1,11 +1,11 @@
 import type {
-  TChordQuality,
-  TChordType,
-  TIntervalShorthand,
-  TMode,
+  ChordQuality,
+  ChordType,
+  IntervalShorthand,
+  Mode,
 } from './types.js';
 
-export const intervalsMap: Record<TIntervalShorthand, number> = {
+export const intervalsMap: Record<IntervalShorthand, number> = {
   d2: 0,
   P1: 0,
   A1: 1,
@@ -59,7 +59,7 @@ export const intervalsMap: Record<TIntervalShorthand, number> = {
   A14: 24,
   A15: 25,
 };
-export const intervalsBySemitone: Record<string, TIntervalShorthand[]> = {
+export const intervalsBySemitone: Record<string, IntervalShorthand[]> = {
   '0': ['P1', 'd2'],
   '1': ['m2', 'A1'],
   '2': ['M2', 'd3'],
@@ -88,7 +88,7 @@ export const intervalsBySemitone: Record<string, TIntervalShorthand[]> = {
   '25': ['A15'],
 };
 
-export const chordQualityIntervalsMap: Record<string, TIntervalShorthand[]> = {
+export const chordQualityIntervalsMap: Record<string, IntervalShorthand[]> = {
   major: ['P1', 'M3', 'P5'],
   augmented: ['P1', 'M3', 'A5'],
   minor: ['P1', 'm3', 'P5'],
@@ -105,7 +105,7 @@ export const scaleIntervals = {
   locrian: ['P1', 'm2', 'm3', 'P4', 'd5', 'm6', 'm7', 'P8'],
 } as const;
 
-type ScaleType = keyof typeof scaleIntervals;
+export type ScaleType = keyof typeof scaleIntervals;
 export const scaleTypes = Object.keys(scaleIntervals) as ScaleType[];
 
 const futureScaleIntervals = {
@@ -168,7 +168,7 @@ export const oldMajorScales: Record<string, string[]> = {
   'C#': ['C#', 'D#', 'E#', 'F#', 'G#', 'A#', 'B#'],
 };
 
-export const modes: TMode[] = [
+export const modes: Mode[] = [
   'ionian',
   'dorian',
   'phrygian',
@@ -177,7 +177,7 @@ export const modes: TMode[] = [
   'aeolian',
   'locrian',
 ];
-export const majorScaleQualities: TChordQuality[] = [
+export const majorScaleQualities: ChordQuality[] = [
   'major',
   'minor',
   'minor',
@@ -200,7 +200,7 @@ export const romanNumerals = [
 export const addTypes = ['add2', 'add4', 'add9', 'add11', 'add13'];
 export const susTypes = ['sus2', 'sus4'];
 
-export const numberTypeChordMap: Record<string, TChordType> = {
+export const numberTypeChordMap: Record<string, ChordType> = {
   2: 'second',
   4: 'fourth',
   5: 'fifth',

@@ -1,8 +1,6 @@
 import { ScaleGroups, scales } from '../db/scales/allScales.js';
 import { noteToInteger } from '../notes/noteToInteger.js';
 
-type KeyGuess = { name?: string; scale: string[] };
-
 const getScaleIntegersObj = (name: ScaleGroups) => {
   return Object.entries(scales[name]).reduce<Record<string, number[]>>(
     (accum, [scaleName, scaleInfo]) => {
@@ -13,7 +11,7 @@ const getScaleIntegersObj = (name: ScaleGroups) => {
   );
 };
 
-export const guessScale = (
+export const guessMajorScale = (
   includedNotes: string[],
   excludedNotes: string[]
 ) => {

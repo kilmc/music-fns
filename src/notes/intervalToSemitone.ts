@@ -1,8 +1,8 @@
 import { intervalsMap } from '../consts.js';
-import type { TIntervalShorthand } from '../types.js';
+import type { IntervalShorthand } from '../types.js';
 
 export const intervalToSemitone = (
-  interval: TIntervalShorthand,
+  interval: IntervalShorthand,
   normalized = false
 ) => {
   const semitones = intervalsMap[interval];

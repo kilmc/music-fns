@@ -7,7 +7,7 @@ describe('getChord', () => {
     expect(getChord('Eb').notes).toEqual(['Eb', 'G', 'Bb']);
   });
 
-  it.only('supports minor chords', () => {
+  it('supports minor chords', () => {
     expect(getChord('Am').notes).toEqual(['A', 'C', 'E']);
     expect(getChord('D#m').notes).toEqual(['D#', 'F#', 'A#']);
   });

@@ -1,8 +1,8 @@
 import { modes, scaleIntervals } from '../consts.js';
-import type { TMode, TScaleType } from '../types.js';
+import type { Mode, TScaleType } from '../types.js';
 
-export function isModeName(value: string | undefined): value is TMode {
-  return modes.includes(value as TMode);
+export function isModeName(value: string | undefined): value is Mode {
+  return modes.includes(value as Mode);
 }
 
 export function isScaleType(value: string): value is TScaleType {

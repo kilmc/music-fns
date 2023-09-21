@@ -1,4 +1,3 @@
-import { MIDINumber } from '../types.js';
 import { isMidiNumber, keyboardNotePositions } from './helpers.js';
 
 export const noteToMidi = (note: string): number | undefined => {

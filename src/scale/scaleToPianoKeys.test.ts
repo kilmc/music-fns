@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { ScaleKey, scaleToPianoKeys } from './scaleToMidiKeys.js';
+import { ScaleKey, scaleToPianoKeys } from './scaleToPianoKeys.js';
 
 export const majorScales: [string, string[], ScaleKey[]][] = [
   [
@@ -199,7 +199,7 @@ export const majorScales: [string, string[], ScaleKey[]][] = [
   ],
 ];
 
-describe('scaleToMidiKeys', () => {
+describe('scaleToPianoKeys', () => {
   it.each(majorScales)('gets degrees for %s', (_, scale, result) => {
     expect(scaleToPianoKeys(scale)).toStrictEqual(result);
   });

@@ -1,8 +1,7 @@
 import { chordQualityIntervalsMap } from '../consts.js';
 import { offsetArr } from '../helper.js';
-import { determineNoteType } from '../notes/determineNoteType.js';
 import { transposeNote } from '../notes/transpose.js';
-import type { IChord, IChordInfo, TIntervalShorthand } from '../types.js';
+import type { Chord, ChordInfo, IntervalShorthand } from '../types.js';
 import { determineChord } from './determineChordInfo.js';
 
 const chordInfoToIntervalMap = ({
@@ -12,8 +11,8 @@ const chordInfoToIntervalMap = ({
   type,
   quality,
   susType,
-}: IChordInfo): TIntervalShorthand[] => {
-  let intervals: TIntervalShorthand[] = chordQualityIntervalsMap[quality];
+}: ChordInfo): IntervalShorthand[] => {
+  let intervals: IntervalShorthand[] = chordQualityIntervalsMap[quality];
 
   if (type === 'fifth') {
     intervals = intervals.filter((interval) => !interval.includes('3'));
@@ -83,7 +82,7 @@ const chordInfoToIntervalMap = ({
   return intervals;
 };
 
-export const getChord = (name: string): IChord => {
+export const getChord = (name: string): Chord => {
   if (name === '') {
     return {
       name: `Type a chord`,
@@ -105,6 +104,7 @@ export const getChord = (name: string): IChord => {
     return transposeNote(chordInfo.note, interval, {
       forceFlat: chordInfo.pitchClassType === 'flat',
       forceSharp: chordInfo.pitchClassType === 'sharp',
+      forceSimple: true,
     });
   });
   const { slashNote } = chordInfo;

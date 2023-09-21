@@ -23,6 +23,10 @@ describe('transposeNote', () => {
   });
 
   it('uses a scale of notes to constrain the results', () => {
-    expect(transposeNote('C', 'P1', { keyName: 'C# Major' })).toEqual('B#');
+    expect(
+      transposeNote('C', 'P1', {
+        scale: ['C#', 'D#', 'E#', 'F#', 'G#', 'A#', 'B#'],
+      })
+    ).toEqual('B#');
   });
 });

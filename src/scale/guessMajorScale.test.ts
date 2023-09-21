@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
-import { guessScale } from './guessScale.js';
+import { guessMajorScale } from './guessMajorScale.js';
 
-describe('guessScale', () => {
+describe('guessMajorScale', () => {
   const testSongs = [
     {
       title: 'Dancing Queen',
@@ -51,11 +51,17 @@ describe('guessScale', () => {
       excludedNotes: [],
       key: ['Db major', 'C# major'],
     },
+    {
+      title: 'Antonia',
+      includedNotes: ['C#', 'D#', 'F', 'F#', 'G#', 'A#', 'B'],
+      excludedNotes: [],
+      key: ['Gb major', 'F# major'],
+    },
   ];
 
   it.each(testSongs)('$title', ({ includedNotes, excludedNotes, key }) => {
     expect(
-      guessScale(includedNotes, excludedNotes).map(([name]) => name)
+      guessMajorScale(includedNotes, excludedNotes).map(([name]) => name)
     ).toStrictEqual(key);
   });
 });

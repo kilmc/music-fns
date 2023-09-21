@@ -1,24 +1,24 @@
 import { addTypes, susTypes } from '../consts.js';
 import type {
   ScaleQualities,
-  TAddType,
-  TChordQuality,
-  TSusType,
+  AddType,
+  ChordQuality,
+  SusType,
 } from '../types.js';
 
-export function isAddType(value: string): value is TAddType {
-  return addTypes.includes(value as TAddType);
+export function isAddType(value: string): value is AddType {
+  return addTypes.includes(value as AddType);
 }
 
-export function isSusType(value: string): value is TSusType {
-  return susTypes.includes(value as TSusType);
+export function isSusType(value: string): value is SusType {
+  return susTypes.includes(value as SusType);
 }
 
 export const chordRegexp = new RegExp(
   /((?:^[A-G])(?:#|b)?)(aug|dim|maj|m|M|o|\+)?(2|4|5|6|7|9|11|13)?((?:(?:#|b)(?:5|7|9|11|13))+)?(add(?:2|4|9|11|13)?)?(sus(?:2|4|9)?)?(\/[A-G](?:#|b)?)?/
 );
 
-export const scaleQualitiesToChordSymbol = (quality: TChordQuality) => {
+export const scaleQualitiesToChordSymbol = (quality: ChordQuality) => {
   switch (quality) {
     case 'major':
       return '';

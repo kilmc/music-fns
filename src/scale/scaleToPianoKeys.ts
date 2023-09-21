@@ -1,4 +1,4 @@
-import { scaleToSequentialKeys } from './scaleToMidiNumbers.js';
+import { scaleToSequentialKeys } from './scaleToSequentialKeys.js';
 
 export const scaleToPianoKeys = (scale: string[]) => {
   const integers = scaleToSequentialKeys(scale);

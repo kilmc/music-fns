@@ -1,12 +1,12 @@
 import { romanNumeralCase } from '../chords/helpers.js';
 import { majorScaleQualities, modes, romanNumerals } from '../consts.js';
 import { offsetArr } from '../helper.js';
-import { TMode } from '../types.js';
+import { Mode } from '../types.js';
 
 export const getScaleDegreeOfNote = (
   note: string,
   scale: string[],
-  mode: TMode = 'ionian'
+  mode: Mode = 'ionian'
 ) => {
   const reOrdered = offsetArr(majorScaleQualities, modes.indexOf(mode));
   return romanNumerals.map((numeral, i) => {

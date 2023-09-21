@@ -1,11 +1,11 @@
 import { numberTypeChordMap } from '../consts.js';
 import { determineNoteType } from '../notes/determineNoteType.js';
 import type {
-  IChordInfo,
-  TAddType,
-  TChordQuality,
-  TChordType,
-  TSusType,
+  ChordInfo,
+  AddType,
+  ChordQuality,
+  ChordType,
+  SusType,
 } from '../types.js';
 import { chordRegexp, isAddType } from './helpers.js';
 
@@ -15,7 +15,7 @@ const determineAlteredNotes = (alteredNotes?: string) => {
     : (alteredNotes.match(/(#|b)(?:5|7|9|11|13)/g) as string[]);
 };
 
-const determineChordQuality = (quality?: string): TChordQuality => {
+const determineChordQuality = (quality?: string): ChordQuality => {
   if (quality === undefined || ['Δ', 'M', 'maj'].includes(quality)) {
     return 'major';
   }
@@ -39,15 +39,15 @@ const determineChordQuality = (quality?: string): TChordQuality => {
   return 'major';
 };
 
-const determindChordType = (type?: string): TChordType => {
+const determindChordType = (type?: string): ChordType => {
   return type === undefined ? 'triad' : numberTypeChordMap[type];
 };
 
-const determineAdd = (add?: string): TAddType | undefined => {
+const determineAdd = (add?: string): AddType | undefined => {
   return add && isAddType(add) ? add : undefined;
 };
 
-const determineSus = (sus?: string): TSusType | undefined => {
+const determineSus = (sus?: string): SusType | undefined => {
   if (sus === undefined) return undefined;
   if (['sus', 'sus4', 'sus9'].includes(sus)) return 'sus4';
   if (sus === 'sus2') return 'sus2';
@@ -58,7 +58,7 @@ const determineSlashChord = (slashNote?: string) => {
   return slashNote?.replace('/', '');
 };
 
-export const determineChord = (name: string): IChordInfo => {
+export const determineChord = (name: string): ChordInfo => {
   const [note, quality, type, altered, add, sus, slashNote] =
     name.match(chordRegexp)?.slice(1) || [];
 

@@ -12,13 +12,13 @@ export type Range<F extends number, T extends number> = Exclude<
   Enumerate<F>
 >;
 
-export type TIntervalQuality =
+export type IntervalQuality =
   | 'perfect'
   | 'major'
   | 'minor'
   | 'augmented'
   | 'diminished';
-export type TChordQuality =
+export type ChordQuality =
   | 'major'
   | 'minor'
   | 'augmented'
@@ -26,7 +26,7 @@ export type TChordQuality =
   | 'half-diminished'
   | 'dominant';
 
-export type TMode =
+export type Mode =
   | 'ionian'
   | 'dorian'
   | 'phrygian'
@@ -35,7 +35,7 @@ export type TMode =
   | 'aeolian'
   | 'locrian';
 
-export type TChordType =
+export type ChordType =
   | 'second'
   | 'triad'
   | 'fourth'
@@ -46,7 +46,7 @@ export type TChordType =
   | 'eleventh'
   | 'thirteenth';
 
-export type TIntervalShorthand =
+export type IntervalShorthand =
   | 'd2'
   | 'P1'
   | 'A1'
@@ -102,24 +102,25 @@ export type TIntervalShorthand =
 
 export type TScaleType = keyof typeof scaleIntervals;
 
-export type TAddType = 'add2' | 'add4' | 'add9' | 'add11' | 'add13';
-export type TSusType = 'sus2' | 'sus4';
+export type AddType = 'add2' | 'add4' | 'add9' | 'add11' | 'add13';
+export type SusType = 'sus2' | 'sus4';
 
-export interface IChordInfo {
+export interface ChordInfo {
   name: string;
   note: string;
-  quality: TChordQuality;
-  type?: TChordType;
+  quality: ChordQuality;
+  type?: ChordType;
   alteredNotes?: string[];
-  addType?: TAddType;
-  susType?: TSusType;
+  addType?: AddType;
+  susType?: SusType;
   slashNote?: string;
   pitchClassType: NoteType;
 }
 
-export interface IChord {
+export interface Chord {
   name: string;
   notes: string[];
+  romanNumeral: string;
 }
 
 export type ScaleQualities = (typeof majorScaleQualities)[number];

@@ -550,10 +550,6 @@ export const locrian: Record<string, ScaleInfo> = {
   },
 };
 
-type LocrianNames = keyof typeof locrian;
-
-export const melodicMinor = {};
-
 export const scales = {
   major,
   dorian,

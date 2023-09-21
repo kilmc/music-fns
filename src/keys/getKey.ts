@@ -6,12 +6,18 @@ import { isScaleType } from '../modes/helpers.js';
 import { extractScaleName } from '../scale/extractName.js';
 import { getMajorFromMode } from '../scale/getMajorFromMode.js';
 import { getFriendlyModeName } from '../scale/helpers.js';
-import type { IChord, TMode } from '../types.js';
+import { scaleToPianoKeys } from '../scale/scaleToPianoKeys.js';
+import type { Chord, Mode } from '../types.js';
 import { getRelativeMinorName } from './helpers.js';
+
+type ScaleNotes = {
+  names: string[];
+  midiKeys: number[];
+};
 
 type KeyInfo = {
   name: string;
-  notes: string[];
+  notes: ScaleNotes;
   major: {
     name: string;
     notes: string[];
@@ -20,20 +26,16 @@ type KeyInfo = {
     name: string;
     notes: string[];
   };
-  modes(name: TMode): string[];
-  chords: IChord[];
+  modes(name: Mode): string[];
+  chords: Chord[];
 };
 
 export const getKey = (key: string): KeyInfo | undefined => {
   const [pitch, mode] = extractScaleName(key) || [];
   const friendlyModeName = getFriendlyModeName(mode);
-  if (mode === undefined || pitch === undefined) {
-    return;
-  }
+  if (mode === undefined || pitch === undefined) return undefined;
 
-  if (!isScaleType(friendlyModeName)) {
-    return;
-  }
+  if (!isScaleType(friendlyModeName)) return undefined;
 
   const keyQuality = friendlyModeName;
   const majorPitch = isMajor(mode)
@@ -46,18 +48,27 @@ export const getKey = (key: string): KeyInfo | undefined => {
     scaleTypes.indexOf(friendlyModeName)
   );
 
+  const notes = scaleToPianoKeys(scale).reduce<ScaleNotes>((accum, xs) => {
+    accum.names ? accum.names.push(xs.note) : (accum.names = [xs.note]);
+    accum.midiKeys
+      ? accum.midiKeys.push(xs.midiNumber)
+      : (accum.midiKeys = [xs.midiNumber]);
+
+    return accum;
+  }, {} as ScaleNotes);
+
   return {
     name: `${pitch} ${keyQuality}`,
-    notes: scale,
+    notes: notes,
     major: {
       name: `${majorPitch} major`,
       notes: majorScale.notes,
     },
     minor: {
-      name: getRelativeMinorName(pitch),
+      name: getRelativeMinorName(majorPitch),
       notes: offsetArr(majorScale.notes, 5),
     },
-    modes(name: TMode) {
+    modes(name: Mode) {
       return offsetArr(majorScale.notes, modes.indexOf(name));
     },
     chords: getScaleChords(scale, friendlyModeName),

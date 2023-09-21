@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
-import { scaleToSequentialKeys } from './scaleToMidiNumbers.js';
+import { scaleToSequentialKeys } from './scaleToSequentialKeys.js';
 
-describe('scaleToIntegers', () => {
+describe('scaleToSequentialKeys', () => {
   it('converts an array of notes to an array of integers', () => {
     expect(
       scaleToSequentialKeys(['C', 'D', 'E', 'F', 'G', 'A', 'B'])
