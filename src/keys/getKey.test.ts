@@ -139,4 +139,8 @@ describe('getKey', () => {
     expect(result?.minor.notes).toEqual(minorNotes);
     expect(result?.chords.map((chord) => chord.name)).toEqual(chordNames);
   });
+
+  it('handles unknown keys', () => {
+    expect(getKey('X dorian')).toBe(undefined);
+  });
 });

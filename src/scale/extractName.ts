@@ -6,11 +6,10 @@ export const extractScaleName = (
 ): [string, TScaleType | Mode] | undefined => {
   const regex = new RegExp(/([A-G](?:b|#)?) (.*)/);
   const [pitchClass, scale] = name.match(regex)?.slice(1, 3) || [];
-  const normalScale = scale.toLowerCase().replaceAll(' ', '-');
 
-  if ((pitchClass || scale) === undefined) {
-    console.log('Not a scale');
-  }
+  if ((pitchClass || scale) === undefined) return undefined;
+
+  const normalScale = scale.toLowerCase().replaceAll(' ', '-');
 
   if (normalScale === 'ionian') {
     return [pitchClass, 'major'];
