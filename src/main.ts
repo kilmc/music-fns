@@ -14,6 +14,7 @@ export { midiToNote, noteToMidi } from './notes/noteToMidi.js';
 export { transposeNote } from './notes/transpose.js';
 
 // Scales
+export { extractScaleName } from './scale/extractName.js';
 export { getScale } from './scale/getScale.js';
 export { getScaleDegrees } from './scale/getScaleDegrees.js';
 export { guessMajorScale } from './scale/guessMajorScale.js';
