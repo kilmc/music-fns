@@ -1,5 +1,11 @@
 # @kilmc/music-fns
 
+## 0.7.0
+
+### Minor Changes
+
+- 0459670: Add extractName function
+
 ## 0.6.1
 
 ### Patch Changes
