@@ -120,7 +120,7 @@ export type NotePosition = {
   flat?: string;
 };
 
-export const notePositions2: NotePosition[] = [
+export const notePositions: NotePosition[] = [
   { natural: 'A' },
   { sharp: 'A#', flat: 'Bb' },
   { natural: 'B', flat: 'Cb' },
@@ -134,39 +134,6 @@ export const notePositions2: NotePosition[] = [
   { natural: 'G' },
   { sharp: 'G#', flat: 'Ab' },
 ];
-
-export const notePositions = [
-  ['A'],
-  ['A#', 'Bb'],
-  ['B', 'Cb'],
-  ['C', 'B#'],
-  ['C#', 'Db'],
-  ['D'],
-  ['D#', 'Eb'],
-  ['E', 'Fb'],
-  ['F', 'E#'],
-  ['F#', 'Gb'],
-  ['G'],
-  ['G#', 'Ab'],
-];
-
-export const oldMajorScales: Record<string, string[]> = {
-  C: ['C', 'D', 'E', 'F', 'G', 'A', 'B'],
-  F: ['F', 'G', 'A', 'Bb', 'C', 'D', 'E'],
-  Bb: ['Bb', 'C', 'D', 'Eb', 'F', 'G', 'A'],
-  Eb: ['Eb', 'F', 'G', 'Ab', 'Bb', 'C', 'D'],
-  Ab: ['Ab', 'Bb', 'C', 'Db', 'Eb', 'F', 'G'],
-  Db: ['Db', 'Eb', 'F', 'Gb', 'Ab', 'Bb', 'C'],
-  Gb: ['Gb', 'Ab', 'Bb', 'Cb', 'Db', 'Eb', 'F'],
-  Cb: ['Cb', 'Db', 'Eb', 'Fb', 'Gb', 'Ab', 'Bb'],
-  G: ['G', 'A', 'B', 'C', 'D', 'E', 'F#'],
-  D: ['D', 'E', 'F#', 'G', 'A', 'B', 'C#'],
-  A: ['A', 'B', 'C#', 'D', 'E', 'F#', 'G#'],
-  E: ['E', 'F#', 'G#', 'A', 'B', 'C#', 'D#'],
-  B: ['B', 'C#', 'D#', 'E', 'F#', 'G#', 'A#'],
-  'F#': ['F#', 'G#', 'A#', 'B', 'C#', 'D#', 'E#'],
-  'C#': ['C#', 'D#', 'E#', 'F#', 'G#', 'A#', 'B#'],
-};
 
 export const modes: Mode[] = [
   'ionian',

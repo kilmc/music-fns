@@ -19,7 +19,7 @@ export { getScale } from './scale/getScale.js';
 export { getScaleDegrees } from './scale/getScaleDegrees.js';
 export { guessMajorScale } from './scale/guessMajorScale.js';
 export { scaleToPianoKeys } from './scale/scaleToPianoKeys.js';
-export { scaleToSequentialKeys } from './scale/scaleToSequentialKeys.js';
+export { notesToSequentialKeys } from './scale/notesToSequentialKeys.js';
 
 // Consts
 export {
@@ -32,3 +32,8 @@ export {
   minor,
   locrian,
 } from './db/scales/allScales.js';
+
+export { modes } from './consts.js';
+
+// Types
+export type { KeyInfo } from './types.js';

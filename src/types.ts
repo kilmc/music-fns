@@ -123,6 +123,26 @@ export interface Chord {
   romanNumeral?: string;
 }
 
+export type ScaleNotes = {
+  names: string[];
+  midiKeys: number[];
+};
+
+export type KeyInfo = {
+  name: string;
+  notes: ScaleNotes;
+  major: {
+    name: string;
+    notes: string[];
+  };
+  minor: {
+    name: string;
+    notes: string[];
+  };
+  modes(name: Mode): string[];
+  chords: Chord[];
+};
+
 export type ScaleQualities = (typeof majorScaleQualities)[number];
 
 export type MIDINumber = Range<0, 127>;

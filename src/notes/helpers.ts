@@ -1,13 +1,13 @@
-import { notePositions2 } from '../consts.js';
+import { notePositions } from '../consts.js';
 import { offsetArr } from '../helper.js';
 import { MIDINumber } from '../types.js';
 
 export const resetNotePositions = (note: string) => {
-  const noteIndex = notePositions2.findIndex((notes) =>
+  const noteIndex = notePositions.findIndex((notes) =>
     Object.values(notes).includes(note)
   );
 
-  return offsetArr(notePositions2, noteIndex);
+  return offsetArr(notePositions, noteIndex);
 };
 
 export function isMidiNumber(value: any): value is MIDINumber {
