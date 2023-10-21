@@ -1,11 +1,11 @@
-import { notePositions2 } from '../consts.js';
+import { notePositions } from '../consts.js';
 import { determineNoteType } from './determineNoteType.js';
 
 export const getEquivalentNote = (note: string) => {
-  const positionIndex = notePositions2.findIndex((notes) =>
+  const positionIndex = notePositions.findIndex((notes) =>
     Object.values(notes).includes(note)
   );
-  const noteGroup = notePositions2[positionIndex];
+  const noteGroup = notePositions[positionIndex];
   const hasEquivalents = Object.values(noteGroup).length > 1;
 
   if (positionIndex !== -1 && hasEquivalents) {

@@ -1,7 +1,7 @@
-import { scaleToSequentialKeys } from './scaleToSequentialKeys.js';
+import { notesToSequentialKeys } from './notesToSequentialKeys.js';
 
 export const scaleToPianoKeys = (scale: string[]) => {
-  const integers = scaleToSequentialKeys(scale);
+  const integers = notesToSequentialKeys(scale);
 
   return scale.map((note, i) => {
     return { midiNumber: integers[i], note };

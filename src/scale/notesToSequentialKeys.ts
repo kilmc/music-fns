@@ -1,6 +1,6 @@
 import { noteToMidi } from '../notes/noteToMidi.js';
 
-export const scaleToSequentialKeys = (scale: string[], octave = -1) => {
+export const notesToSequentialKeys = (scale: string[], octave = -1) => {
   const startingNote = noteToMidi(`${scale[0]}${octave}`);
 
   return scale.map((note) => {

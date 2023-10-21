@@ -7,28 +7,8 @@ import { extractScaleName } from '../scale/extractName.js';
 import { getMajorFromMode } from '../scale/getMajorFromMode.js';
 import { getFriendlyModeName } from '../scale/helpers.js';
 import { scaleToPianoKeys } from '../scale/scaleToPianoKeys.js';
-import type { Chord, Mode } from '../types.js';
+import type { KeyInfo, Mode, ScaleNotes } from '../types.js';
 import { getRelativeMinorName } from './helpers.js';
-
-type ScaleNotes = {
-  names: string[];
-  midiKeys: number[];
-};
-
-type KeyInfo = {
-  name: string;
-  notes: ScaleNotes;
-  major: {
-    name: string;
-    notes: string[];
-  };
-  minor: {
-    name: string;
-    notes: string[];
-  };
-  modes(name: Mode): string[];
-  chords: Chord[];
-};
 
 export const getKey = (key: string): KeyInfo | undefined => {
   const [pitch, mode] = extractScaleName(key) || [];
