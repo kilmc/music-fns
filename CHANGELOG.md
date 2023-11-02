@@ -1,5 +1,11 @@
 # @kilmc/music-fns
 
+## 1.0.0
+
+### Major Changes
+
+- 1929b08: A full release after a rewrite to make things more robust
+
 ## 0.7.0
 
 ### Minor Changes
