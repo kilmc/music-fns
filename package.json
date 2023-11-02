@@ -1,6 +1,6 @@
 {
   "name": "@kilmc/music-fns",
-  "description": "A template JS package",
+  "description": "A set of music theory helpers and tools",
   "version": "0.7.0",
   "main": "dist/bundle.js",
   "types": "dist/main.d.ts",
