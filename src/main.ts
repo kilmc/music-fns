@@ -1,34 +1,22 @@
-// Chords
-export { getChord } from './chords/getChord.js';
-export { getScaleChords } from './chords/getScaleChords.js';
-
-// Keys
-export { getKey } from './keys/getKey.js';
-
-// Notes
-export { getEquivalentNote } from './notes/getEquivalentNote.js';
-export { getInterval } from './notes/getInterval.js';
-export { getScaleDegreeOfNote } from './notes/getScaleDegreeOfNote.js';
-export { noteToInteger } from './notes/noteToInteger.js';
-export { midiToNote, noteToMidi } from './notes/noteToMidi.js';
-export { transposeNote } from './notes/transpose.js';
-
-// Scales
-export { extractScaleName } from './scale/extractName.js';
-export { getScale } from './scale/getScale.js';
-export { getScaleDegrees } from './scale/getScaleDegrees.js';
-export { guessMajorScale } from './scale/guessMajorScale.js';
-export { scaleToPianoKeys } from './scale/scaleToPianoKeys.js';
-export { scaleToSequentialKeys } from './scale/scaleToSequentialKeys.js';
+export { getChord } from './public/getChord/getChord.js';
+export { getKey } from './public/getKey/getKey.js';
+export { getScale } from './public/getScale/getScale.js';
+export { guessKey } from './public/guessKey/guessKey.js';
+export { readScale } from './public/readScale.js';
+export { transposeNote } from './public/transposeNote.js';
 
 // Consts
+// ----------------------------------------------------------------------------
 export {
-  scales,
-  major,
-  dorian,
-  phrygian,
-  lydian,
-  mixolydian,
-  minor,
-  locrian,
-} from './db/scales/allScales.js';
+  harmonicMinorModalKeyNames,
+  majorModalKeyNames,
+  melodicMinorModalKeyNames,
+} from './public/consts.js';
+
+// Types
+// ----------------------------------------------------------------------------
+
+export type { Chord } from './public/getChord/getChord.js';
+export type { Key } from './public/getKey/getKey.js';
+export type { Scale } from './public/getScale/getScale.js';
+export type { ScaleInfo } from './public/readScale.js';

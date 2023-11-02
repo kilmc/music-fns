@@ -34,7 +34,7 @@
 
 ### Minor Changes
 
-- 2f778d4: Expose getScaleChords, guessScale, getScale, getEquivalentNote, getInterval, transposeNote
+- 2f778d4: Expose getScaleChords, guessKey, getScale, getEquivalentNote, getInterval, transposeNote
 
 ## 0.2.0
 

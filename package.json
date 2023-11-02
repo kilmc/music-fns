@@ -1,6 +1,6 @@
 {
   "name": "@kilmc/music-fns",
-  "description": "A template JS package",
+  "description": "A set of music theory helpers and tools",
   "version": "0.7.0",
   "main": "dist/bundle.js",
   "types": "dist/main.d.ts",
@@ -12,7 +12,8 @@
     "build": "rollup --config",
     "test": "vitest",
     "changeset": "changeset",
-    "release": "pnpm build && changeset publish"
+    "release": "pnpm build && changeset publish",
+    "typecheck": "tsc --project tsconfig.json --noEmit"
   },
   "keywords": [],
   "author": "Kilian McMahon",
@@ -21,6 +22,7 @@
     "@changesets/cli": "^2.26.1",
     "@rollup/plugin-terser": "^0.4.0",
     "@rollup/plugin-typescript": "^11.0.0",
+    "@total-typescript/ts-reset": "^0.5.1",
     "rollup": "^3.20.2",
     "tslib": "^2.5.0",
     "typescript": "^5.0.2",
