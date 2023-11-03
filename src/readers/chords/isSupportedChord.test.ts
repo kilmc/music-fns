@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import { isSupportedChord } from './isSupportedChord.js';
 
-describe.only('isSupportedChord', () => {
+describe('isSupportedChord', () => {
   const supportedChords = [
     'C',
     'Cm',
