@@ -1,5 +1,11 @@
 # @kilmc/music-fns
 
+## 1.2.0
+
+### Minor Changes
+
+- fde6d19: Add scale types
+
 ## 1.1.0
 
 ### Minor Changes
