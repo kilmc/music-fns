@@ -4,21 +4,34 @@ import { getChord } from './getChord.js';
 describe('chord', () => {
   describe('major chords', () => {
     const majorTriads = [
-      { chordName: 'A', notes: ['A', 'C#', 'E'] },
-      { chordName: 'BM', notes: ['B', 'D#', 'F#'] },
-      { chordName: 'Cmaj', notes: ['C', 'E', 'G'] },
-      { chordName: 'Cb', notes: ['Cb', 'Eb', 'Gb'] },
-      { chordName: 'Db', notes: ['Db', 'F', 'Ab'] },
-      { chordName: 'Eb', notes: ['Eb', 'G', 'Bb'] },
-      { chordName: 'B#', notes: ['B#', 'D##', 'F##'] },
-      { chordName: 'C#', notes: ['C#', 'E#', 'G#'] },
-      { chordName: 'D#', notes: ['D#', 'F##', 'A#'] },
+      { chordName: 'A', notes: ['A', 'C#', 'E'], midiNumbers: [69, 73, 76] },
+      { chordName: 'BM', notes: ['B', 'D#', 'F#'], midiNumbers: [71, 75, 78] },
+      { chordName: 'Cmaj', notes: ['C', 'E', 'G'], midiNumbers: [60, 64, 67] },
+      { chordName: 'Cb', notes: ['Cb', 'Eb', 'Gb'], midiNumbers: [71, 75, 78] },
+      { chordName: 'Db', notes: ['Db', 'F', 'Ab'], midiNumbers: [61, 65, 68] },
+      { chordName: 'Eb', notes: ['Eb', 'G', 'Bb'], midiNumbers: [63, 67, 70] },
+      {
+        chordName: 'B#',
+        notes: ['B#', 'D##', 'F##'],
+        midiNumbers: [60, 64, 67],
+      },
+      { chordName: 'C#', notes: ['C#', 'E#', 'G#'], midiNumbers: [61, 65, 68] },
+      {
+        chordName: 'D#',
+        notes: ['D#', 'F##', 'A#'],
+        midiNumbers: [63, 67, 70],
+      },
     ];
-    it.each(majorTriads)('$chordName major', ({ chordName, notes }) => {
-      expect(
-        getChord(chordName)?.notes?.map((note) => note?.name)
-      ).toStrictEqual(notes);
-    });
+    it.each(majorTriads)(
+      '$chordName major',
+      ({ chordName, notes, midiNumbers }) => {
+        const result = getChord(chordName);
+        expect(result?.notes?.map((note) => note?.name)).toStrictEqual(notes);
+        expect(result?.notes.map((note) => note.midiNumber)).toStrictEqual(
+          midiNumbers
+        );
+      }
+    );
   });
 
   describe('minor chords', () => {
@@ -235,5 +248,9 @@ describe('chord', () => {
         getChord(chordName)?.notes?.map((note) => note?.name)
       ).toStrictEqual(notes);
     });
+  });
+
+  it('handles invalid chords', () => {
+    expect(getChord('Ce')).toBe(undefined);
   });
 });
