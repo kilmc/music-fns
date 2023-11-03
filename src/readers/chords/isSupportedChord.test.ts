@@ -55,6 +55,7 @@ describe('isSupportedChord', () => {
     'Cdimm',
     'F#augg',
     'F#mm',
+    'Caug19',
   ];
   it.each(invalidChords)('considers %s invalid', (chordName) => {
     expect(isSupportedChord(chordName)).toBe(false);
