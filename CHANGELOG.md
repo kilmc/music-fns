@@ -1,5 +1,11 @@
 # @kilmc/music-fns
 
+## 1.1.0
+
+### Minor Changes
+
+- 315dcaa: Add validation for chords and expose types
+
 ## 1.0.0
 
 ### Major Changes
