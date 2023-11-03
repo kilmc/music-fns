@@ -8,6 +8,7 @@ import { IntervalShorthand } from '../../consts/intervals.js';
 import { handleSusNotes } from './handleSusNotes.js';
 import { transposedChordNotesToNotes } from '../../converters/chords/transposedChordNotesToNotes.js';
 import { Note } from '../../consts/notes.js';
+import { isSupportedChord } from '../../readers/chords/isSupportedChord.js';
 
 export type Chord = {
   name: string;
@@ -21,6 +22,8 @@ export const emptyChord: Chord = {
 };
 
 export const getChord = (input: string): Chord | undefined => {
+  if (!isSupportedChord(input)) return undefined;
+
   const chord = readChord(input);
 
   if (chord.quality === undefined) return undefined;
