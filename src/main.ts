@@ -23,3 +23,4 @@ export type { Key } from './public/getKey/getKey.js';
 export type { Scale } from './public/getScale/getScale.js';
 export type { ScaleInfo } from './public/readScale.js';
 export type { Note } from './consts/notes.js';
+export type { TransposedNote } from './public/transposeNote.js';
