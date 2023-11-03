@@ -176,7 +176,7 @@ describe('chord', () => {
       });
     });
 
-    describe.only('minor major seventh', () => {
+    describe('minor major seventh', () => {
       const diminishedSevenths = [
         { chordName: 'Cmmaj7', notes: ['C', 'Eb', 'G', 'B'] },
         { chordName: 'CmM7', notes: ['C', 'Eb', 'G', 'B'] },
