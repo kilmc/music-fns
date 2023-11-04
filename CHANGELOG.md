@@ -1,5 +1,11 @@
 # @kilmc/music-fns
 
+## 1.3.0
+
+### Minor Changes
+
+- 0a2b410: Add parallel modes to key
+
 ## 1.2.0
 
 ### Minor Changes
