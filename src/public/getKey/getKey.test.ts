@@ -100,4 +100,68 @@ describe('makeKey', () => {
       expect(chordNumeralsResult).toStrictEqual(chordNumerals);
     }
   );
+
+  it('gets relative modes', () => {
+    expect(getKey('C major')?.relativeModes).toStrictEqual([
+      'C major',
+      'D dorian',
+      'E phrygian',
+      'F lydian',
+      'G mixolydian',
+      'A minor',
+      'B locrian',
+    ]);
+
+    expect(getKey('C melodic minor')?.relativeModes).toStrictEqual([
+      'C melodic minor',
+      'D dorian flat 2',
+      'Eb lydian augmented',
+      'F lydian dominant',
+      'G mixolydian flat 6',
+      'A aeolian flat 2',
+      'B super locrian',
+    ]);
+
+    expect(getKey('C melodic minor')?.relativeModes).toStrictEqual([
+      'C melodic minor',
+      'D dorian flat 2',
+      'Eb lydian augmented',
+      'F lydian dominant',
+      'G mixolydian flat 6',
+      'A aeolian flat 2',
+      'B super locrian',
+    ]);
+  });
+
+  it('gets parallel modes', () => {
+    expect(getKey('C major')?.parallelModes).toStrictEqual([
+      'C major',
+      'C dorian',
+      'C phrygian',
+      'C lydian',
+      'C mixolydian',
+      'C minor',
+      'C locrian',
+    ]);
+
+    expect(getKey('C melodic minor')?.parallelModes).toStrictEqual([
+      'C melodic minor',
+      'C dorian flat 2',
+      'C lydian augmented',
+      'C lydian dominant',
+      'C mixolydian flat 6',
+      'C aeolian flat 2',
+      'C super locrian',
+    ]);
+
+    expect(getKey('C melodic minor')?.parallelModes).toStrictEqual([
+      'C melodic minor',
+      'C dorian flat 2',
+      'C lydian augmented',
+      'C lydian dominant',
+      'C mixolydian flat 6',
+      'C aeolian flat 2',
+      'C super locrian',
+    ]);
+  });
 });
