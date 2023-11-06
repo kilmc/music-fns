@@ -191,7 +191,7 @@ describe('chord', () => {
     });
   });
 
-  describe.only('non-seventh extended chords', () => {
+  describe('non-seventh extended chords', () => {
     const addChords = [
       { chordName: 'C2', notes: ['C', 'D', 'E', 'G'] },
       { chordName: 'C4', notes: ['C', 'F', 'Bb', 'Eb'] },
