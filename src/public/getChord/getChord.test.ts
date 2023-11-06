@@ -191,6 +191,30 @@ describe('chord', () => {
     });
   });
 
+  describe('non-seventh extended chords', () => {
+    const addChords = [
+      { chordName: 'C2', notes: ['C', 'D', 'E', 'G'] },
+      { chordName: 'C4', notes: ['C', 'F', 'Bb', 'Eb'] },
+      { chordName: 'C5', notes: ['C', 'G', 'C'] },
+      { chordName: 'C6', notes: ['C', 'E', 'G', 'A'] },
+      { chordName: 'Cm6', notes: ['C', 'Eb', 'G', 'A'] },
+      { chordName: 'C6/9', notes: ['C', 'E', 'G', 'A', 'D'] },
+      { chordName: 'C9', notes: ['C', 'E', 'G', 'Bb', 'D'] },
+      { chordName: 'Cm9', notes: ['C', 'Eb', 'G', 'Bb', 'D'] },
+      { chordName: 'Cmaj9', notes: ['C', 'E', 'G', 'B', 'D'] },
+      { chordName: 'C11', notes: ['C', 'E', 'G', 'Bb', 'D', 'F'] },
+      { chordName: 'Cm11', notes: ['C', 'Eb', 'G', 'Bb', 'D', 'F'] },
+      { chordName: 'C13', notes: ['C', 'E', 'G', 'Bb', 'D', 'F', 'A'] },
+      { chordName: 'Cm13', notes: ['C', 'Eb', 'G', 'Bb', 'D', 'A'] },
+      { chordName: 'Cmaj13', notes: ['C', 'E', 'G', 'B', 'D', 'A'] },
+    ];
+    it.each(addChords)('$chordName', ({ chordName, notes }) => {
+      expect(
+        getChord(chordName)?.notes?.map((note) => note?.name)
+      ).toStrictEqual(notes);
+    });
+  });
+
   describe('add chords', () => {
     const addChords = [
       { chordName: 'Cadd2', notes: ['C', 'D', 'E', 'G'] },

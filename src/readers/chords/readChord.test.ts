@@ -117,13 +117,26 @@ describe('readChord', () => {
       });
     });
 
+    it('six-nine chords', () => {
+      expect(readChord('B6/9')).toStrictEqual({
+        ...empty,
+        input: 'B6/9',
+        chordRoot: 'B',
+        rootNote: 'B',
+        quality: 'major',
+        type: 'sixth',
+        isAddChord: true,
+        addDegree: 9,
+      });
+    });
+
     it('ninth chords', () => {
       expect(readChord('C9')).toStrictEqual({
         ...empty,
         input: 'C9',
         chordRoot: 'C',
         rootNote: 'C',
-        quality: 'major',
+        quality: 'dominant',
         type: 'ninth',
       });
     });
@@ -134,7 +147,7 @@ describe('readChord', () => {
         input: 'C11',
         chordRoot: 'C',
         rootNote: 'C',
-        quality: 'major',
+        quality: 'dominant',
         type: 'eleventh',
       });
     });
@@ -145,7 +158,7 @@ describe('readChord', () => {
         input: 'C13',
         chordRoot: 'C',
         rootNote: 'C',
-        quality: 'major',
+        quality: 'dominant',
         type: 'thirteenth',
       });
     });

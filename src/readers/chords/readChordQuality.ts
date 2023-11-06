@@ -17,12 +17,17 @@ export const readChordQuality = (
   const regex = new RegExp(`${noteRegex.source}(${chordQualityRegex.source})?`);
   const quality = input.match(regex)?.slice(3, 4)[0];
 
-  if (quality === undefined && type === 'seventh') return 'dominant';
+  const hasQuality = quality !== undefined;
+  const hasType = type !== undefined;
 
   if (
-    quality === undefined ||
-    majorChordIdentifiers.some((i) => quality === i)
-  ) {
+    !hasQuality &&
+    hasType &&
+    ['seventh', 'ninth', 'eleventh', 'thirteenth'].includes(type)
+  )
+    return 'dominant';
+
+  if (!hasQuality || majorChordIdentifiers.some((i) => quality === i)) {
     return 'major';
   }
 

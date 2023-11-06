@@ -3,6 +3,9 @@ import { ChordInfo } from '../../readers/chords/readChord.js';
 import { transposeNote } from '../transposeNote.js';
 
 export const createAddNotes = (chord: ChordInfo) => {
+  if (chord.type === 'second') {
+    return transposeNote(chord.chordRoot, 'M2');
+  }
   if (!chord.isAddChord) return undefined;
 
   const intervalSymbol = /(4|11)/.test(String(chord.addDegree)) ? 'P' : 'M';
