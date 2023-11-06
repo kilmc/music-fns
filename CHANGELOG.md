@@ -1,5 +1,11 @@
 # @kilmc/music-fns
 
+## 1.4.0
+
+### Minor Changes
+
+- 001d49a: Add support for 2nd, 4th, 5th, 6th, 9th, 11th and 13th chords
+
 ## 1.3.0
 
 ### Minor Changes
