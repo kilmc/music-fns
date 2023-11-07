@@ -1,3 +1,4 @@
+import { ChordQuality } from '../../consts/chords.js';
 import { IntervalShorthand } from '../../consts/intervals.js';
 import { ChordInfo } from '../../readers/chords/readChord.js';
 
@@ -38,10 +39,19 @@ const thirteenthMap: Record<string, IntervalShorthand[]> = {
   minor: ['m7', 'M9', 'M13'],
 };
 
+const isSupported = (
+  obj: Record<string, IntervalShorthand[]>,
+  quality: ChordQuality
+) => {
+  return obj[quality] !== undefined;
+};
+
 export const chordInfoToBaseIntervals = (
   chordInfo: ChordInfo
 ): IntervalShorthand[] => {
-  const { type, quality } = chordInfo;
+  const { type, quality: rawQuality } = chordInfo;
+
+  const quality = rawQuality === undefined ? 'dominant' : rawQuality;
 
   // second handled in createAddNotes as they're aliases
 
@@ -49,35 +59,23 @@ export const chordInfoToBaseIntervals = (
   if (type === 'fifth') return ['P5', 'P8'];
 
   if (type === 'sixth') {
-    return [...qualityMap[quality === undefined ? 'dominant' : quality], 'M6'];
+    return [...qualityMap[quality], 'M6'];
   }
 
-  if (type === 'seventh') {
-    return [
-      ...qualityMap[quality === undefined ? 'dominant' : quality],
-      ...seventhMap[quality === undefined ? 'dominant' : quality],
-    ];
+  if (type === 'seventh' && isSupported(seventhMap, quality)) {
+    return [...qualityMap[quality], ...seventhMap[quality]];
   }
 
-  if (type === 'ninth') {
-    return [
-      ...qualityMap[quality === undefined ? 'dominant' : quality],
-      ...ninthMap[quality === undefined ? 'dominant' : quality],
-    ];
+  if (type === 'ninth' && isSupported(ninthMap, quality)) {
+    return [...qualityMap[quality], ...ninthMap[quality]];
   }
 
-  if (type === 'eleventh') {
-    return [
-      ...qualityMap[quality === undefined ? 'dominant' : quality],
-      ...eleventhMap[quality === undefined ? 'dominant' : quality],
-    ];
+  if (type === 'eleventh' && isSupported(eleventhMap, quality)) {
+    return [...qualityMap[quality], ...eleventhMap[quality]];
   }
 
-  if (type === 'thirteenth') {
-    return [
-      ...qualityMap[quality === undefined ? 'dominant' : quality],
-      ...thirteenthMap[quality === undefined ? 'dominant' : quality],
-    ];
+  if (type === 'thirteenth' && isSupported(thirteenthMap, quality)) {
+    return [...qualityMap[quality], ...thirteenthMap[quality]];
   }
 
   if (quality === 'major') return qualityMap[quality];
