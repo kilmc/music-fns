@@ -1,5 +1,11 @@
 # @kilmc/music-fns
 
+## 1.4.1
+
+### Patch Changes
+
+- 609eec2: Fix issue with missing qualities in chord extension maps
+
 ## 1.4.0
 
 ### Minor Changes
