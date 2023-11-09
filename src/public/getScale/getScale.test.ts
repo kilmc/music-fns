@@ -2,7 +2,7 @@ import { describe, expect, it } from 'vitest';
 import { getScale } from './getScale.js';
 import { scaleTypes } from '../../main.js';
 
-describe.only('makeScale', () => {
+describe('makeScale', () => {
   const scales = [
     { name: 'A major', notes: ['A', 'B', 'C#', 'D', 'E', 'F#', 'G#'] },
     { name: 'B major', notes: ['B', 'C#', 'D#', 'E', 'F#', 'G#', 'A#'] },
