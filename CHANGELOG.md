@@ -1,5 +1,11 @@
 # @kilmc/music-fns
 
+## 1.4.2
+
+### Patch Changes
+
+- 0796c89: Ensure scale aliases are considered in getScale function
+
 ## 1.4.1
 
 ### Patch Changes
