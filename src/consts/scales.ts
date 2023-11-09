@@ -55,10 +55,14 @@ export const scaleTypes = [
   'augmented',
   'diminished',
   'half-whole diminished',
-  'half-diminished pentatonic',
   'dominant diminished',
   'whole tone',
   'aeolian sharp 7',
+  'aeolian dominant',
+  'acoustic scale',
+  'whole-half diminished',
+  'inverted diminished',
+  'fully diminished',
 ] as const;
 
 export type ScaleType = (typeof scaleTypes)[number];
@@ -123,13 +127,13 @@ export const melodicMinorScaleDefinitions: ScaleDefinition[] = [
   {
     name: 'melodic minor',
     modeOf: 'melodic minor',
-    aliases: ['melodic minor'],
+    aliases: ['melodic minor', 'jazz minor'],
     intervalsByTone: ['W', 'H', 'W', 'W', 'W', 'W', 'H'],
   },
   {
     name: 'dorian flat 2',
     modeOf: 'melodic minor',
-    aliases: ['dorian flat 2'],
+    aliases: ['dorian flat 2', 'phrygian sharp 6'],
     intervalsByTone: ['H', 'W', 'W', 'W', 'W', 'H', 'W'],
   },
   {
@@ -141,19 +145,19 @@ export const melodicMinorScaleDefinitions: ScaleDefinition[] = [
   {
     name: 'lydian dominant',
     modeOf: 'melodic minor',
-    aliases: ['lydian dominant'],
+    aliases: ['lydian dominant', 'acoustic scale', 'overtone scale'],
     intervalsByTone: ['W', 'W', 'W', 'H', 'W', 'H', 'W'],
   },
   {
     name: 'mixolydian flat 6',
     modeOf: 'melodic minor',
-    aliases: ['mixolydian flat 6'],
+    aliases: ['mixolydian flat 6', 'aeolian dominant'],
     intervalsByTone: ['W', 'W', 'H', 'W', 'H', 'W', 'W'],
   },
   {
     name: 'aeolian flat 2',
     modeOf: 'melodic minor',
-    aliases: ['locrian natural 2'],
+    aliases: ['locrian natural 2', 'aeolian flat 2'],
     intervalsByTone: ['W', 'H', 'W', 'H', 'W', 'W', 'W'],
   },
   {
@@ -174,19 +178,19 @@ export const harmonicMinorScaleDefinitions: ScaleDefinition[] = [
   {
     name: 'locrian natural 6',
     modeOf: 'harmonic minor',
-    aliases: [],
+    aliases: ['locrian natural 6'],
     intervalsByTone: ['H', 'W', 'W', 'H', '3H', 'H', 'W'],
   },
   {
     name: 'ionian sharp 5',
     modeOf: 'harmonic minor',
-    aliases: [],
+    aliases: ['ionian sharp 5'],
     intervalsByTone: ['W', 'W', 'H', '3H', 'H', 'W', 'H'],
   },
   {
     name: 'dorian sharp 4',
     modeOf: 'harmonic minor',
-    aliases: ['ukranian dorian'],
+    aliases: ['ukranian dorian', 'dorian sharp 4'],
     intervalsByTone: ['W', 'H', '3H', 'H', 'W', 'H', 'W'],
   },
   {
@@ -204,7 +208,12 @@ export const harmonicMinorScaleDefinitions: ScaleDefinition[] = [
   {
     name: 'ultralocrian',
     modeOf: 'harmonic minor',
-    aliases: ['super locrian', 'altered scale'],
+    aliases: [
+      'super locrian',
+      'altered scale',
+      'ultralocrian',
+      'super locrian diminished',
+    ],
     intervalsByTone: ['3H', 'H', 'W', 'H', 'W', 'W', 'H'],
   },
 ];
@@ -246,8 +255,22 @@ export const scaleDefinitions: ScaleDefinition[] = [
   },
   {
     name: 'diminished',
-    aliases: ['diminished'],
+    aliases: ['diminished', 'dominant diminished', 'half-whole diminished'],
+    intervalsByTone: ['H', 'W', 'H', 'W', 'H', 'W', 'H', 'W'],
+  },
+  {
+    name: 'whole-half diminished',
+    aliases: [
+      'whole-half diminished',
+      'inverted diminished',
+      'fully diminished',
+    ],
     intervalsByTone: ['W', 'H', 'W', 'H', 'W', 'H', 'W', 'H'],
+  },
+  {
+    name: 'whole tone',
+    aliases: ['whole tone'],
+    intervalsByTone: ['W', 'W', 'W', 'W', 'W', 'W'],
   },
 ];
 

@@ -31,7 +31,9 @@ export const getScale = (input: string): Scale | undefined => {
   const { noteName, type } = readScale(input);
 
   if (type === undefined) return undefined;
-  const scaleConfig = scaleDefinitions.find((config) => config.name === type);
+  const scaleConfig = scaleDefinitions.find((config) =>
+    config.aliases.includes(type)
+  );
 
   if (scaleConfig === undefined) return undefined;
   if (noteName === undefined) return undefined;
