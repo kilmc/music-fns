@@ -1,7 +1,7 @@
 {
   "name": "@kilmc/music-fns",
   "description": "A set of music theory helpers and tools",
-  "version": "1.4.1",
+  "version": "1.4.2",
   "main": "dist/bundle.js",
   "types": "dist/main.d.ts",
   "type": "module",
